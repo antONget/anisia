@@ -71,9 +71,10 @@ async def send_video_content(message: Message, state: FSMContext) -> None:
     await asyncio.sleep(3 * minutes)
     await message.answer(text=MESSAGE_TEXT['inside1'])
     await state.set_state(Form.inside)
-    await asyncio.sleep(60 * 24 * minutes)
+    await asyncio.sleep(60 * 1 * minutes)  # 24
     scheduler = AsyncIOScheduler()
-    scheduler.add_job(check_state, 'cron', hour='10', minute='01', args=('inside', message, state))
+    scheduler.add_job(check_state, 'interval', seconds=60, args=('inside', message, state, scheduler))
+    # scheduler.add_job(check_state, 'cron', hour='10', minute='01', args=('inside', message, state))
     scheduler.start()
 
 
@@ -93,16 +94,17 @@ async def send_video_content(message: Message, state: FSMContext, bot: Bot) -> N
                          reply_markup=bay_product())
 
 
-async def check_state(chek_state: str, message: Message, state: FSMContext):
+async def check_state(chek_state: str, message: Message, state: FSMContext, scheduler):
     current_state = await state.get_state()  # текущее машинное состояние пользователя
     if current_state == f'Form:{chek_state}':
         logging.info(f'check1_state-{chek_state}: {message.chat.id}')
         await message.answer(text=MESSAGE_TEXT['inside2'])
-        await asyncio.sleep(60 * 24 * minutes)
+        await asyncio.sleep(60 * 1 * minutes)  # 24
         current_state = await state.get_state()
         if current_state == f'Form:{chek_state}':
             logging.info(f'check2_state-{chek_state}: {message.chat.id}')
             await message.answer(text=MESSAGE_TEXT['inside3'],
                                  reply_markup=link_blog())
+    scheduler.shutdown()
 
 
