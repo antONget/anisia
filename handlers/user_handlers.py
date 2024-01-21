@@ -71,9 +71,9 @@ async def send_video_content(message: Message, state: FSMContext) -> None:
     await asyncio.sleep(3 * minutes)
     await message.answer(text=MESSAGE_TEXT['inside1'])
     await state.set_state(Form.inside)
-    await asyncio.sleep(60 * 1 * minutes)
+    await asyncio.sleep(60 * 24 * minutes)
     scheduler = AsyncIOScheduler()
-    scheduler.add_job(check_state, 'cron', hour='3', minute='55', args=('inside', message, state))
+    scheduler.add_job(check_state, 'cron', hour='10', minute='01', args=('inside', message, state))
     scheduler.start()
 
 
@@ -98,7 +98,7 @@ async def check_state(chek_state: str, message: Message, state: FSMContext):
     if current_state == f'Form:{chek_state}':
         logging.info(f'check1_state-{chek_state}: {message.chat.id}')
         await message.answer(text=MESSAGE_TEXT['inside2'])
-        await asyncio.sleep(60 * 1 * minutes)
+        await asyncio.sleep(60 * 24 * minutes)
         current_state = await state.get_state()
         if current_state == f'Form:{chek_state}':
             logging.info(f'check2_state-{chek_state}: {message.chat.id}')
