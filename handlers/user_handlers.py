@@ -65,11 +65,11 @@ async def send_video_content(message: Message, state: FSMContext) -> None:
 @router.message(StateFilter(Form.phone))
 async def send_video_content(message: Message, state: FSMContext) -> None:
     update_phone(message)
-    await message.answer(f"{LINK_VIDEO['video0']}{LINK_VIDEO['video0']}")
+    await message.answer(f"{MESSAGE_TEXT['video0']}\n{LINK_VIDEO['video0']}{LINK_VIDEO['video0']}")
     await asyncio.sleep(3 * minutes)
-    await message.answer(f"{LINK_VIDEO['video1']}{LINK_VIDEO['video1']}")
+    await message.answer(f"{MESSAGE_TEXT['video1']}\n{LINK_VIDEO['video1']}{LINK_VIDEO['video1']}")
     await asyncio.sleep(3 * minutes)
-    await message.answer(f"{LINK_VIDEO['video2']}{LINK_VIDEO['video2']}")
+    await message.answer(f"{MESSAGE_TEXT['video2']}\n{LINK_VIDEO['video2']}{LINK_VIDEO['video2']}")
     await asyncio.sleep(3 * minutes)
     await message.answer(text=MESSAGE_TEXT['inside0'])
     await asyncio.sleep(5)
@@ -86,7 +86,7 @@ async def send_video_content(message: Message, state: FSMContext) -> None:
 async def send_video_content(message: Message, state: FSMContext, bot: Bot) -> None:
     await state.set_state(Form.finish)
     update_inside(message)
-    await message.answer(f"{LINK_VIDEO['video3']}{LINK_VIDEO['video3']}")
+    await message.answer(f"{MESSAGE_TEXT['video3']}\n{LINK_VIDEO['video3']}{LINK_VIDEO['video3']}")
     await asyncio.sleep(3 * minutes)
     ID, username, name, phone, inside = select_row(message)
     await bot.send_message(chat_id=config.tg_bot.admin_ids,
