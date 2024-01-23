@@ -65,10 +65,14 @@ async def send_video_content(message: Message, state: FSMContext) -> None:
 @router.message(StateFilter(Form.phone))
 async def send_video_content(message: Message, state: FSMContext) -> None:
     update_phone(message)
+    await message.answer(f"{LINK_VIDEO['video0']}{LINK_VIDEO['video0']}")
+    await asyncio.sleep(3 * minutes)
     await message.answer(f"{LINK_VIDEO['video1']}{LINK_VIDEO['video1']}")
     await asyncio.sleep(3 * minutes)
     await message.answer(f"{LINK_VIDEO['video2']}{LINK_VIDEO['video2']}")
     await asyncio.sleep(3 * minutes)
+    await message.answer(text=MESSAGE_TEXT['inside0'])
+    await asyncio.sleep(5)
     await message.answer(text=MESSAGE_TEXT['inside1'])
     await state.set_state(Form.inside)
     await asyncio.sleep(60 * 1 * minutes)  # 24

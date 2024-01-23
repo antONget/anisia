@@ -1,5 +1,6 @@
 LINK_VIDEO = {
-    'video1': 'https://www.youtube.com/watch?v=0kUkAxZlW44',
-    'video2': 'https://www.youtube.com/watch?v=iwZ-Gso7a_A',
-    'video3': 'https://www.youtube.com/watch?v=egwj2y7gpmY',
+    'video0': 'https://youtu.be/-SrQWaf1Uhg?si=557hYRl4EVVFs6Hb',
+    'video1': 'https://youtu.be/S2en8ZAnRvE?si=RxuLsWQfloL_7AxW',
+    'video2': 'https://youtu.be/4IRfDjLoGJU?si=szokpjrsTRiUPb2S',
+    'video3': 'https://youtu.be/jbYnxZkjcxw?si=lGzxzcNeE3mzL-Mu',
 }
