@@ -142,7 +142,7 @@ async def send_video_content(message: Message, state: FSMContext, bot: Bot) -> N
                            text=f'<b>{ID} {username}</b>\n\n'
                                 f'<u>Пользователь {name}</u>\n'
                                 f'<i>Номер телефона:</i> {phone}\n'
-                                f'<i>Email:</i> {email}'
+                                f'<i>Email:</i> {email}\n'
                                 f'<i>Инсайд:</i> {inside}')
 
 
