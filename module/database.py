@@ -10,6 +10,7 @@ sql.execute("""CREATE TABLE IF NOT EXISTS users(
     id INT,
     username TEXT,
     name TEXT,
+    email TEXT,
     phone TEXT,
     inside TEXT
 )""")
@@ -20,18 +21,20 @@ def add_id(message: Message):
     sql.execute("SELECT id FROM users WHERE id = ?", (message.chat.id,))
     if sql.fetchone() is None:
         try:
-            sql.execute(f"INSERT INTO users VALUES(?,?,?,?,?)",
+            sql.execute(f"INSERT INTO users VALUES(?,?,?,?,?,?)",
                         (message.chat.id,
                          message.from_user.username,
                          'name',
+                         'email',
                          'phone',
                          'inside'))
             db.commit()
         except:
-            sql.execute(f"INSERT INTO users VALUES(?,?,?,?,?)",
+            sql.execute(f"INSERT INTO users VALUES(?,?,?,?,?,?)",
                         (message.chat.id,
                          'username',
                          'name',
+                         'email',
                          'phone',
                          'inside'))
             db.commit()
@@ -44,8 +47,14 @@ def update_name(message: Message):
     db.commit()
 
 
+def update_email(message: Message):
+    sql.execute(f"UPDATE users SET email = ? WHERE id = ?",
+                (message.text,
+                 message.chat.id))
+    db.commit()
+
+
 def update_phone(message: Message):
-    print(type(message.text))
     if message.contact is not None:
         phone = message.contact.phone_number
     else:
